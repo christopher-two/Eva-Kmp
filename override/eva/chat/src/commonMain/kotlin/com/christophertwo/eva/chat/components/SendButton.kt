@@ -20,9 +20,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.christophertwo.eva.chat.config.SendButtonConfig
 import com.christophertwo.eva.chat.textfield.AITextFieldState
-import eva_kmp.eva.chat.generated.resources.Res
-import eva_kmp.eva.chat.generated.resources.pause_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
-import eva_kmp.eva.chat.generated.resources.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import org.christophertwo.eva.chat.generated.resources.Res
+import org.christophertwo.eva.chat.generated.resources.pause_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import org.christophertwo.eva.chat.generated.resources.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.jetbrains.compose.resources.painterResource
 
 /**

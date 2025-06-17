@@ -3,7 +3,6 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     "kotlin"
@@ -15,10 +14,15 @@ plugins {
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
 }
 
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "org.override.eva.chat.generated.resources"
+}
+
 kotlin {
 
     androidLibrary {
-        namespace = "org.christophertwo.eva.chat"
+        namespace = "org.override.eva.chat"
         compileSdk = 35
         minSdk = 24
 
@@ -77,6 +81,10 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.kotlinx.datetime)
             implementation(libs.materialKolor)
+            implementation(libs.filekit.core)
+            implementation(libs.filekit.dialogs)
+            implementation(libs.filekit.dialogs.compose)
+            implementation(libs.filekit.coil)
         }
 
         commonTest.dependencies {

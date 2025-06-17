@@ -34,5 +34,6 @@ plugins {
 }
 
 include(":composeApp")
-include(":eva:chat")
+include(":override:eva:chat")
+include(":override:eva:resources")
 

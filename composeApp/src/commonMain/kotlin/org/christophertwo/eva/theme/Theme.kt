@@ -97,7 +97,7 @@ internal fun AppTheme(
         val isDark by isDarkState
         SystemAppearance(!isDark)
         MaterialTheme(
-            colorScheme = if (isDark) DarkColorScheme else LightColorScheme,
+            colorScheme = if (true) DarkColorScheme else LightColorScheme,
             content = { Surface(content = content) }
         )
     }

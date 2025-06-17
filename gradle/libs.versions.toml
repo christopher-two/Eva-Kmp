@@ -1,5 +1,9 @@
 [versions]
 
+filekitCore = "0.10.0-beta04"
+filekitDialogs = "0.10.0-beta04"
+filekitDialogsCompose = "0.10.0-beta04"
+filekitCoil = "0.10.0-beta04"
 kotlin = "2.1.21"
 compose = "1.8.1"
 agp = "8.10.1"
@@ -22,6 +26,10 @@ koin-bom = "4.1.0"
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-uitest-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
 androidx-uitest-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
+filekit-coil = { module = "io.github.vinceglb:filekit-coil", version.ref = "filekitCoil" }
+filekit-dialogs-compose = { module = "io.github.vinceglb:filekit-dialogs-compose", version.ref = "filekitDialogsCompose" }
+filekit-dialogs = { module = "io.github.vinceglb:filekit-dialogs", version.ref = "filekitDialogs" }
+filekit-core = { module = "io.github.vinceglb:filekit-core", version.ref = "filekitCore" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }

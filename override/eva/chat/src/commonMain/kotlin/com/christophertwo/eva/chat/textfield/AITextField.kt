@@ -46,10 +46,10 @@ import com.christophertwo.eva.chat.components.CharacterCounter
 import com.christophertwo.eva.chat.components.SendButton
 import com.christophertwo.eva.chat.config.AITextFieldConfig
 import com.christophertwo.eva.chat.config.DropdownConfig
-import eva_kmp.eva.chat.generated.resources.Res
-import eva_kmp.eva.chat.generated.resources.add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
-import eva_kmp.eva.chat.generated.resources.attach_file_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
-import eva_kmp.eva.chat.generated.resources.mic_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import org.christophertwo.eva.chat.generated.resources.Res
+import org.christophertwo.eva.chat.generated.resources.add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import org.christophertwo.eva.chat.generated.resources.attach_file_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import org.christophertwo.eva.chat.generated.resources.mic_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.jetbrains.compose.resources.painterResource
 
 /**
@@ -93,7 +93,7 @@ fun AITextField(
         modifier = modifier
             .fillMaxSize()
             .border(
-                width = 1.dp,
+                width = 3.dp,
                 color = borderColor,
                 shape = RoundedCornerShape(config.cornerRadius.dp)
             )
