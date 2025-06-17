@@ -1,4 +1,4 @@
-package com.christophertwo.eva.chat.components
+package org.override.eva.chat.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,7 +9,6 @@ import io.github.vinceglb.filekit.dialogs.FileKitMode
 import io.github.vinceglb.filekit.dialogs.FileKitType
 import io.github.vinceglb.filekit.dialogs.compose.rememberFilePickerLauncher
 import io.github.vinceglb.filekit.name
-
 
 @Composable
 fun FileMonoSelector(

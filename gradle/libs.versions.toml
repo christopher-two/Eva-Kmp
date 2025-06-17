@@ -1,5 +1,6 @@
 [versions]
-
+compileSdk = "35"
+minSdk = "24"
 filekitCore = "0.10.0-beta04"
 filekitDialogs = "0.10.0-beta04"
 filekitDialogsCompose = "0.10.0-beta04"

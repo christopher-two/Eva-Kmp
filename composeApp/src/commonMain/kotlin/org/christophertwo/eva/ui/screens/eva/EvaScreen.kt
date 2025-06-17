@@ -27,14 +27,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.christophertwo.eva.chat.config.AITextFieldConfig
-import com.christophertwo.eva.chat.config.SendButtonConfig
-import com.christophertwo.eva.chat.textfield.AITextField
-import com.christophertwo.eva.chat.textfield.AITextFieldEvent
-import com.christophertwo.eva.chat.textfield.AITextFieldState
-import eva_kmp.composeapp.generated.resources.Res
-import org.christophertwo.eva.chat.generated.resources.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import org.override.eva.chat.config.AITextFieldConfig
+import org.override.eva.chat.config.SendButtonConfig
+import org.override.eva.chat.textfield.AITextField
+import org.override.eva.chat.textfield.AITextFieldEvent
+import org.override.eva.chat.textfield.AITextFieldState
+import org.override.eva.generated.resources.Res
 import org.koin.compose.viewmodel.koinViewModel
+import org.override.eva.generated.resources.pause_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import org.override.eva.generated.resources.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 
 @Composable
 fun EvaRoot(
@@ -161,7 +162,8 @@ private fun TextField(
             sendButtonConfig = SendButtonConfig(
                 backgroundColor = colorScheme.primary,
                 contentColor = colorScheme.onPrimary,
-                icon = Res.drawable.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+                sendIcon = Res.drawable.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24,
+                pauseIcon = Res.drawable.pause_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
             )
         )
     )

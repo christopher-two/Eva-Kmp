@@ -3,8 +3,8 @@ package org.christophertwo.eva.ui.screens.eva
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.christophertwo.eva.chat.textfield.AITextFieldEvent
-import com.christophertwo.eva.chat.textfield.AITextFieldState
+import org.override.eva.chat.textfield.AITextFieldEvent
+import org.override.eva.chat.textfield.AITextFieldState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

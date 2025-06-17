@@ -1,4 +1,4 @@
-package com.christophertwo.eva.chat.components
+package org.override.eva.chat.components
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme

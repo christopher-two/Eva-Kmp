@@ -131,11 +131,12 @@ kotlin {
 
 android {
     namespace = "org.christophertwo.eva"
-    compileSdk = 35
+    namespace = "org.override.eva.chat"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 35
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
 
         applicationId = "org.christophertwo.eva.androidApp"
         versionCode = 1

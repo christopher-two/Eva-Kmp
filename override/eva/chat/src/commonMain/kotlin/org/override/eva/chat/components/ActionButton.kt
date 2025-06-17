@@ -1,4 +1,4 @@
-package com.christophertwo.eva.chat.components
+package org.override.eva.chat.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon

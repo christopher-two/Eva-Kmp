@@ -5,8 +5,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    "kotlin"
-    alias(libs.plugins.multiplatform)
+    kotlin("multiplatform")
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose)
     alias(libs.plugins.hotReload)
@@ -23,8 +22,8 @@ kotlin {
 
     androidLibrary {
         namespace = "org.override.eva.chat"
-        compileSdk = 35
-        minSdk = 24
+        compileSdk = libs.versions.compileSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         withHostTestBuilder {}.configure {}
         withDeviceTestBuilder {
@@ -39,7 +38,6 @@ kotlin {
             }
         }
     }
-
 
     jvm()
 
@@ -61,6 +59,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":override:eva:resources"))
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

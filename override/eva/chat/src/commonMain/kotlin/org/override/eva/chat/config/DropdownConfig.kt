@@ -1,4 +1,4 @@
-package com.christophertwo.eva.chat.config
+package org.override.eva.chat.config
 
 import androidx.compose.ui.graphics.Color
 
