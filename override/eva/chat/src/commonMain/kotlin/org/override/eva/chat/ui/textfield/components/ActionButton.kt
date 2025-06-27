@@ -1,4 +1,4 @@
-package org.override.eva.chat.components
+package org.override.eva.chat.ui.textfield.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon

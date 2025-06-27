@@ -1,10 +1,7 @@
-package org.override.eva.chat.components
+package org.christophertwo.eva.components
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import io.github.vinceglb.filekit.PlatformFile
 import io.github.vinceglb.filekit.dialogs.FileKitMode
 import io.github.vinceglb.filekit.dialogs.FileKitType
 import io.github.vinceglb.filekit.dialogs.compose.rememberFilePickerLauncher
@@ -14,9 +11,8 @@ import io.github.vinceglb.filekit.name
 fun FileMonoSelector(
     extensions: List<String> = listOf("jpg", "png", "pdf"),
     selectedFileText: (String) -> Unit,
+    selectedFile: (PlatformFile?) -> Unit,
 ) {
-    var selectedFileText by remember { mutableStateOf("Ningún archivo seleccionado") }
-
     val filePickerLauncher = rememberFilePickerLauncher(
         type = FileKitType.File(
             extensions = extensions,
@@ -24,18 +20,22 @@ fun FileMonoSelector(
         onResult = { file ->
             file?.let {
                 selectedFileText("Archivo seleccionado: ${file.name}")
+                selectedFile(file)
             } ?: run {
                 selectedFileText("El usuario canceló la selección")
+                selectedFile(null)
             }
         }
     )
-
+    filePickerLauncher.launch()
 }
 
 @Composable
 fun FileMultiSelector(
     extensions: List<String> = listOf("jpg", "png", "pdf"),
+    onClosed: () -> Unit,
     selectedFileText: (String) -> Unit,
+    selectedFiles: (List<PlatformFile>) -> Unit,
 ) {
     val multipleFilesPickerLauncher = rememberFilePickerLauncher(
         mode = FileKitMode.Multiple(),
@@ -43,9 +43,13 @@ fun FileMultiSelector(
         onResult = { files ->
             files?.let {
                 selectedFileText("Archivos seleccionados: ${files.joinToString(", ") { it.name }}")
+                selectedFiles(files)
             } ?: run {
                 selectedFileText("El usuario canceló la selección")
+                selectedFiles(emptyList())
             }
+            onClosed()
         }
     )
+    multipleFilesPickerLauncher.launch()
 }

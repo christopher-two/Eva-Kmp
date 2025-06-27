@@ -1,4 +1,4 @@
-package org.override.eva.chat.textfield
+package org.override.eva.chat.enums
 
 /**
  * Estado del TextField de IA

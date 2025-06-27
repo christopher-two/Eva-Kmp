@@ -1,4 +1,4 @@
-package org.override.eva.chat.components
+package org.override.eva.chat.ui.textfield.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -18,9 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import org.override.eva.chat.config.SendButtonConfig
-import org.override.eva.chat.textfield.AITextFieldState
 import org.jetbrains.compose.resources.painterResource
+import org.override.eva.chat.config.SendButtonConfig
+import org.override.eva.chat.enums.AITextFieldState
 import org.override.eva.generated.resources.Res
 import org.override.eva.generated.resources.pause_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.override.eva.generated.resources.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
@@ -39,8 +38,16 @@ internal fun SendButton(
 ) {
     val backgroundColor by animateColorAsState(
         targetValue = when (state) {
-            AITextFieldState.SENDING, AITextFieldState.RECEIVING -> MaterialTheme.colorScheme.error
+            AITextFieldState.SENDING, AITextFieldState.RECEIVING -> config.backgroundColorActive
             else -> config.backgroundColor
+        },
+        animationSpec = tween(200)
+    )
+
+    val contentColor by animateColorAsState(
+        targetValue = when (state) {
+            AITextFieldState.SENDING, AITextFieldState.RECEIVING -> config.contentActiveColor
+            else -> config.contentColor
         },
         animationSpec = tween(200)
     )
@@ -74,7 +81,7 @@ internal fun SendButton(
             CircularProgressIndicator(
                 modifier = Modifier.size(20.dp),
                 strokeWidth = 2.dp,
-                color = config.contentColor
+                color = contentColor
             )
         } else {
             Icon(
@@ -84,7 +91,7 @@ internal fun SendButton(
                     else -> "Enviar mensaje"
                 },
                 modifier = Modifier.size(20.dp),
-                tint = config.contentColor
+                tint = contentColor
             )
         }
     }

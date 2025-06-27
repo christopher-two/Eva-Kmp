@@ -60,6 +60,7 @@ kotlin {
         commonMain.dependencies {
             //Modules
             implementation(project(":override:eva:chat"))
+            implementation(project(":override:eva:resources"))
 
             //Compose
             implementation(compose.runtime)
@@ -71,6 +72,10 @@ kotlin {
             //Utils
             implementation(libs.kermit)
             implementation(libs.materialKolor)
+            implementation(libs.filekit.core)
+            implementation(libs.filekit.dialogs)
+            implementation(libs.filekit.dialogs.compose)
+            implementation(libs.filekit.coil)
 
             //Ktor
             implementation(libs.ktor.client.core)

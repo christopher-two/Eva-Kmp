@@ -3,14 +3,18 @@ package org.christophertwo.eva.ui.screens.eva
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import org.override.eva.chat.textfield.AITextFieldEvent
-import org.override.eva.chat.textfield.AITextFieldState
+import io.github.vinceglb.filekit.extension
+import io.github.vinceglb.filekit.nameWithoutExtension
+import io.github.vinceglb.filekit.size
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.override.eva.chat.enums.AITextFieldState
+import org.override.eva.chat.event.AITextFieldEvent
+import org.override.eva.chat.models.FileItem
 
 class EvaViewModel : ViewModel() {
 
@@ -28,6 +32,29 @@ class EvaViewModel : ViewModel() {
             is EvaAction.OnTyping -> {
                 _state.value = _state.value.copy(state = action.state)
             }
+
+            is EvaAction.OnAttachmentText -> {
+                _state.value = _state.value.copy(attachmentsText = action.text)
+            }
+
+            is EvaAction.OnAttachmentFiles -> {
+                val filesItem: MutableList<FileItem> = emptyList<FileItem>().toMutableList()
+                action.files.forEach {
+                    filesItem.add(
+                        FileItem(
+                            name = it.nameWithoutExtension,
+                            path = "",
+                            size = it.size(),
+                            isDirectory = true,
+                            extension = it.extension,
+                            lastModified = 10000L,
+                        )
+                    )
+                }
+                _state.value = _state.value.copy(
+                    attachments = filesItem
+                )
+            }
         }
     }
 
@@ -42,9 +69,19 @@ class EvaViewModel : ViewModel() {
                 onSendMessage()
             }
 
-            else -> {
-
+            is AITextFieldEvent.OnAttachmentRequested -> {
+                _state.value =
+                    _state.value.copy(attachmentAction = _state.value.attachmentAction.not())
             }
+
+            is AITextFieldEvent.OnFilePickerDismiss -> {
+                _state.value = _state.value.copy(
+                    attachmentAction = _state.value.attachmentAction.not(),
+                    attachments = emptyList()
+                )
+            }
+
+            else -> {}
         }
     }
 

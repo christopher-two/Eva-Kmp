@@ -81,10 +81,6 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.kotlinx.datetime)
             implementation(libs.materialKolor)
-            implementation(libs.filekit.core)
-            implementation(libs.filekit.dialogs)
-            implementation(libs.filekit.dialogs.compose)
-            implementation(libs.filekit.coil)
         }
 
         commonTest.dependencies {

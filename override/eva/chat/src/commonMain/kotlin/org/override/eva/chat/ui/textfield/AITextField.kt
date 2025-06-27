@@ -1,4 +1,4 @@
-package org.override.eva.chat.textfield
+package org.override.eva.chat.ui.textfield
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,28 +43,31 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.override.eva.chat.components.ActionButton
-import org.override.eva.chat.components.CharacterCounter
-import org.override.eva.chat.components.SendButton
+import org.jetbrains.compose.resources.painterResource
 import org.override.eva.chat.config.AITextFieldConfig
 import org.override.eva.chat.config.DropdownConfig
-import org.jetbrains.compose.resources.painterResource
+import org.override.eva.chat.enums.AITextFieldState
+import org.override.eva.chat.event.AITextFieldEvent
+import org.override.eva.chat.models.FileItem
+import org.override.eva.chat.models.ItemsDropdown
+import org.override.eva.chat.ui.filepicker.FilePicker
+import org.override.eva.chat.ui.textfield.components.ActionButton
+import org.override.eva.chat.ui.textfield.components.CharacterCounter
+import org.override.eva.chat.ui.textfield.components.SendButton
+import org.override.eva.chat.ui.textfield.components.StateIndicator
 import org.override.eva.generated.resources.Res
 import org.override.eva.generated.resources.add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.override.eva.generated.resources.attach_file_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.override.eva.generated.resources.mic_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 
-/**
- * TextField avanzado y rediseñado para un chat de IA.
- * La distribución del contenido se ha mejorado para ser más flexible y robusta,
- * utilizando `Modifier.weight(1f)` para que el campo de texto se expanda correctamente.
- */
+
 @Composable
 fun AITextField(
     value: TextFieldValue,
     onEvent: (AITextFieldEvent) -> Unit,
     state: AITextFieldState = AITextFieldState.IDLE,
     config: AITextFieldConfig = AITextFieldConfig(),
+    files: List<FileItem> = emptyList(),
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
@@ -86,6 +91,16 @@ fun AITextField(
         targetValue = if (state == AITextFieldState.ERROR) Color.Red.copy(alpha = 0.05f) else config.backgroundColor,
         animationSpec = tween(200),
         label = "containerColorAnimation"
+    )
+
+    FilePicker(
+        isVisible = files.isNotEmpty(),
+        config = config.filePickerConfig,
+        onFileSelected = { onEvent(AITextFieldEvent.OnFilesSelected(it)) },
+        onDismiss = { onEvent(AITextFieldEvent.OnFilePickerDismiss) },
+        modifier = Modifier
+            .fillMaxWidth(0.6f)
+            .fillMaxHeight(0.5f),
     )
 
     // --- UI Layout ---
@@ -226,6 +241,7 @@ fun AITextField(
         dropdownItems = config.dropdownItems,
         config = config.dropdownConfig
     )
+
 }
 
 @Composable

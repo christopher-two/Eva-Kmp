@@ -1,4 +1,6 @@
-package org.override.eva.chat.textfield
+package org.override.eva.chat.event
+
+import org.override.eva.chat.models.FileItem
 
 /**
  * Eventos del TextField de IA
@@ -11,5 +13,6 @@ sealed class AITextFieldEvent {
     object OnAttachmentRequested : AITextFieldEvent()
     object OnActionsRequested : AITextFieldEvent()
     data class OnFocusChanged(val isFocused: Boolean) : AITextFieldEvent()
-    object OnMaxLinesReached : AITextFieldEvent()
+    data class OnFilesSelected(val files: List<FileItem>) : AITextFieldEvent()
+    object OnFilePickerDismiss : AITextFieldEvent()
 }

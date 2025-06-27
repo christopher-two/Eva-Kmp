@@ -27,13 +27,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.christophertwo.eva.components.FileMultiSelector
+import org.koin.compose.viewmodel.koinViewModel
 import org.override.eva.chat.config.AITextFieldConfig
 import org.override.eva.chat.config.SendButtonConfig
-import org.override.eva.chat.textfield.AITextField
-import org.override.eva.chat.textfield.AITextFieldEvent
-import org.override.eva.chat.textfield.AITextFieldState
+import org.override.eva.chat.event.AITextFieldEvent
+import org.override.eva.chat.ui.textfield.AITextField
+import org.override.eva.chat.enums.AITextFieldState
 import org.override.eva.generated.resources.Res
-import org.koin.compose.viewmodel.koinViewModel
 import org.override.eva.generated.resources.pause_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.override.eva.generated.resources.send_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 
@@ -57,11 +58,10 @@ fun EvaScreen(
     onAction: (EvaAction) -> Unit,
 ) {
     LaunchedEffect(state.valueTextFiled) {
-        if (state.valueTextFiled.text.isNotBlank() && state.state == AITextFieldState.IDLE) {
+        if (state.valueTextFiled.text.isNotBlank() && state.state == AITextFieldState.IDLE)
             onAction(EvaAction.OnTyping(AITextFieldState.TYPING))
-        } else if (state.valueTextFiled.text.isBlank() && state.state == AITextFieldState.TYPING) {
+        else if (state.valueTextFiled.text.isBlank() && state.state == AITextFieldState.TYPING)
             onAction(EvaAction.OnTyping(AITextFieldState.IDLE))
-        }
     }
 
     // Animación infinita para el gradiente
@@ -86,15 +86,16 @@ fun EvaScreen(
             repeatMode = RepeatMode.Reverse
         )
     )
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .background(color = colorScheme.background),
-        content = {
+        content = { padding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(it),
+                    .padding(padding),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 content = {
@@ -118,6 +119,19 @@ fun EvaScreen(
                         state = state,
                         onEvent = onEvent
                     )
+                    if (state.attachmentAction) {
+                        FileMultiSelector(
+                            selectedFileText = { text ->
+                                onAction(EvaAction.OnAttachmentText(text))
+                            },
+                            selectedFiles = { files ->
+                                onAction(EvaAction.OnAttachmentFiles(files))
+                            },
+                            onClosed = {
+                                onEvent(AITextFieldEvent.OnAttachmentRequested)
+                            }
+                        )
+                    }
                 }
             )
         }
@@ -149,9 +163,14 @@ private fun TextField(
                     onEvent(it)
                 }
 
+                is AITextFieldEvent.OnAttachmentRequested -> {
+                    onEvent(it)
+                }
+
                 else -> {}
             }
         },
+        files = state.attachments,
         config = AITextFieldConfig(
             backgroundColor = colorScheme.surfaceContainerLowest,
             borderColor = colorScheme.outline,

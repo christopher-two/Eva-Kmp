@@ -1,4 +1,4 @@
-package org.override.eva.chat.textfield
+package org.override.eva.chat.ui.textfield.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.override.eva.chat.enums.AITextFieldState
 
 
 /**
